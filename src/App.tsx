@@ -1,8 +1,7 @@
 import React from 'react';
 import Button from './Button';
 
-import FailedDisplayer from './FailedDisplayer';
-import FailedUpdater from './FailedUpdater';
+
 import { TODO_ADDED, TODO_MARKED_DONE, TODO_MARKED_UNDONE, TODO_DELETE } from './action';
 import { useDispatch, useSelector } from "react-redux";
 import { RiDeleteBin6Fill } from 'react-icons/ri';
@@ -49,11 +48,6 @@ function App() {
 
       <div className="dark:bg-gray-800">
 
-
-
-
-
-
         <h1 className="border border-gray-700 text-xl font-semibold pl-6 dark:text-gray-200">XTodo</h1>
         <div className=' font-bold text-2xl pt-6 text-yellow-500 dark:text-gray-200'>complete todo:{doneNumber}</div>
         <div className=' font-bold text-2xl pt-6 text-red-500 dark:text-gray-200'>incomplete todo:{undoneNumber}</div>
@@ -89,7 +83,7 @@ function App() {
             </div>
             }
           </div>
-          <h1 className="font-semibold text-lg">Things Done</h1>
+          <h1 className="font-semibold text-lg dark:text-gray-200">Things Done</h1>
 
           {doneselect.map((elem: any) => {
             return (<>
@@ -101,6 +95,7 @@ function App() {
                   <RiDeleteBin6Fill className='dark:bg-red-500' onClick={() => dispatch(TODO_DELETE(elem.id))} />
                 </div>
               </div>
+
             </>
             )
 
