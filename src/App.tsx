@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from './Button';
-import Activities from './Activities';
+
 import FailedDisplayer from './FailedDisplayer';
 import FailedUpdater from './FailedUpdater';
 import { TODO_ADDED, TODO_MARKED_DONE, TODO_MARKED_UNDONE, TODO_DELETE } from './action';

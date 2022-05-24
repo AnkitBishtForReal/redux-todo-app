@@ -1,5 +1,5 @@
 import React from 'react';
-function Button(props) {
+function Button(props: any) {
     let themeClasses = 'bg-yellow-500 text-white rounded-lg ';
     if (props.theme === 'secondary') {
         themeClasses = 'bg-white border-slate-200'
