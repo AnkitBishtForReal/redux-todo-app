@@ -8,6 +8,7 @@ import { RiDeleteBin6Fill } from 'react-icons/ri';
 
 import { donecountSelector, doneSelector, todosSelector, undonecountSelector } from "./selector";
 import { RiMoonFill } from "react-icons/ri";
+import TodoRow from './TodoRow';
 
 
 
@@ -42,7 +43,7 @@ function App() {
 
   return (<>
 
-    <div className={` p-10 h-screen items-center justify-center bg-blue-500 flex-col 
+    <div className={` p-10  items-center justify-center bg-blue-500 flex-col 
     ${darkMode && "dark"}`}>
       <button className='flex item-center p-5' onClick={() => setDarkMode(!darkMode)} >      <RiMoonFill />Dark Mode</button>
 
@@ -54,26 +55,23 @@ function App() {
         <div className="pl-6 space-y-4">
           <h1 className="font-bold text-2xl pt-6 dark:text-gray-200 ">Things to get done</h1>
           <h1 className="font-semibold text-lg dark:text-gray-200 ">Things to do</h1>
+          <div className='flex flex-col' >
+            <div>
+              {!undoneNumber && <span>No Todos Here!</span>}
+              {undoneselect.map((elem: any) => {
+                return (<>
+                  <TodoRow todo={elem} ></TodoRow>
+                </>
+                )
 
+              })}
 
-          {undoneselect.map((elem: any) => {
-            return (<>
-              <div className='flex items-center' >
-                <input onClick={() => dispatch(TODO_MARKED_DONE(elem.id))} checked={elem.done} type="checkbox" />
-                <div className='mr-3 ml-3' key={elem.id}><span className={'dark:text-gray-200'}  >{elem.data}</span></div>
-
-                <div >
-                  <RiDeleteBin6Fill className='dark:bg-red-500' onClick={() => dispatch(TODO_DELETE(elem.id))} />
-                </div>
-              </div>
-            </>
-            )
-
-          })}
-
-
-          {!showTodoCreateForm && <Button onClick={updateForm}  >+Add a todo</Button>
-          }
+            </div>
+            <div>
+              {!showTodoCreateForm && <Button onClick={updateForm}  >+Add a todo</Button>
+              }
+            </div>
+          </div>
           <div>
             {showTodoCreateForm && <div className="space-x-2 space-y-2">
               <h1 className="font-semibold text-lg dark:text-gray-200">Create a Todo</h1>
@@ -84,7 +82,7 @@ function App() {
             }
           </div>
           <h1 className="font-semibold text-lg dark:text-gray-200">Things Done</h1>
-
+          {!doneNumber && <span>No done Todos here!</span>}
           {doneselect.map((elem: any) => {
             return (<>
               <div className='flex items-center'>
