@@ -10,10 +10,20 @@ type TodoRowProps = {
 const TodoRow: FC<TodoRowProps> = ({ todo }) => {
     const dispatch = useDispatch();
 
+    const dispatcHandler = () => {
+        if (done) {
+            return dispatch(TODO_MARKED_UNDONE(id))
+        }
+        else {
+            return dispatch(TODO_MARKED_DONE(id))
+        }
+    }
+
+
     const { id, data, done } = todo
     return <div>
         <div className='flex items-center' >
-            <input onClick={() => dispatch(TODO_MARKED_DONE(id))} checked={done} type="checkbox" />
+            <input onClick={dispatcHandler} checked={done} type="checkbox" />
             <div className='mr-3 ml-3' key={id}><span className={'dark:text-gray-200'}  >{data}</span></div>
 
             <div >

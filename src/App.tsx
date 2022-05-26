@@ -85,14 +85,7 @@ function App() {
           {!doneNumber && <span>No done Todos here!</span>}
           {doneselect.map((elem: any) => {
             return (<>
-              <div className='flex items-center'>
-                <input onClick={() => dispatch(TODO_MARKED_UNDONE(elem.id))} checked={elem.done} type="checkbox" />
-                <div className='mr-3 ml-3 line-through' key={elem.id}><span className={'dark:text-gray-200'} >{elem.data}</span></div>
-
-                <div >
-                  <RiDeleteBin6Fill className='dark:bg-red-500' onClick={() => dispatch(TODO_DELETE(elem.id))} />
-                </div>
-              </div>
+              <TodoRow todo={elem} ></TodoRow>
 
             </>
             )
