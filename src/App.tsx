@@ -4,11 +4,13 @@ import Button from './Button';
 
 import { TODO_ADDED, TODO_MARKED_DONE, TODO_MARKED_UNDONE, TODO_DELETE } from './action';
 import { useDispatch, useSelector } from "react-redux";
-import { RiDeleteBin6Fill } from 'react-icons/ri';
+
 
 import { donecountSelector, doneSelector, todosSelector, undonecountSelector } from "./selector";
 import { RiMoonFill } from "react-icons/ri";
-import TodoRow from './TodoRow';
+
+import TodoList from './TodoList';
+import H3 from './H3';
 
 
 
@@ -54,17 +56,11 @@ function App() {
         <div className=' font-bold text-2xl pt-6 text-red-500 dark:text-gray-200'>incomplete todo:{undoneNumber}</div>
         <div className="pl-6 space-y-4">
           <h1 className="font-bold text-2xl pt-6 dark:text-gray-200 ">Things to get done</h1>
-          <h1 className="font-semibold text-lg dark:text-gray-200 ">Things to do</h1>
+          <H3>Things to do</H3>
           <div className='flex flex-col' >
             <div>
               {!undoneNumber && <span>No Todos Here!</span>}
-              {undoneselect.map((elem: any) => {
-                return (<>
-                  <TodoRow todo={elem} ></TodoRow>
-                </>
-                )
-
-              })}
+              <TodoList todos={undoneselect} />
 
             </div>
             <div>
@@ -81,18 +77,9 @@ function App() {
             </div>
             }
           </div>
-          <h1 className="font-semibold text-lg dark:text-gray-200">Things Done</h1>
+          <H3 >Things Done</H3>
           {!doneNumber && <span>No done Todos here!</span>}
-          {doneselect.map((elem: any) => {
-            return (<>
-              <TodoRow todo={elem} ></TodoRow>
-
-            </>
-            )
-
-          })}
-
-
+          <TodoList todos={doneselect} />
 
         </div>
       </div>
