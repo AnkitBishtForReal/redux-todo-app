@@ -24,7 +24,7 @@ const TodoRow: FC<TodoRowProps> = ({ todo }) => {
     return <div>
         <div className='flex items-center' >
             <input onClick={dispatcHandler} checked={done} type="checkbox" />
-            <div className='mr-3 ml-3' key={id}><span className={'dark:text-gray-200'}  >{data}</span></div>
+            <div key={id}><span className={cn('mr-3 ml-3  dark:text-gray-200', { "line-through": done })}  >{data}</span></div>
 
             <div >
 
