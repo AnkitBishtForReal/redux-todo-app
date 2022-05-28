@@ -1,5 +1,8 @@
 import { FC } from "react";
+import { connect } from "react-redux";
 import { Todo } from "./models/Todo"
+import { doneSelector, todosSelector } from "./selector";
+import { State } from "./store";
 
 import TodoRow from "./TodoRow";
 type TodoListProps = {
@@ -16,3 +19,14 @@ TodoList.defaultProps = {
 }
 
 export default TodoList;
+
+const incompleteMapper = (s: State) => {
+    return { todos: todosSelector(s) };
+};
+const completeMapper = (s: State) => {
+    return { todos: doneSelector(s) };
+};
+
+
+export const Incompletetodo = connect(incompleteMapper)(TodoList);
+export const Completetodo = connect(completeMapper)(TodoList);

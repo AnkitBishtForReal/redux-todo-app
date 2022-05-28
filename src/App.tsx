@@ -9,8 +9,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { donecountSelector, doneSelector, todosSelector, undonecountSelector } from "./selector";
 import { RiMoonFill } from "react-icons/ri";
 
-import TodoList from './TodoList';
+import TodoList, { Completetodo, Incompletetodo } from './TodoList';
 import H3 from './H3';
+
 
 
 
@@ -37,8 +38,7 @@ function App() {
 
   const doneNumber = useSelector(donecountSelector);
 
-  const doneselect = useSelector(doneSelector);
-  const undoneselect = useSelector(todosSelector);
+
 
   const undoneNumber = useSelector(undonecountSelector)
 
@@ -60,7 +60,7 @@ function App() {
           <div className='flex flex-col' >
             <div>
               {!undoneNumber && <span>No Todos Here!</span>}
-              <TodoList todos={undoneselect} />
+              <Incompletetodo />
 
             </div>
             <div>
@@ -79,7 +79,7 @@ function App() {
           </div>
           <H3 >Things Done</H3>
           {!doneNumber && <span>No done Todos here!</span>}
-          <TodoList todos={doneselect} />
+          <Completetodo />
 
         </div>
       </div>

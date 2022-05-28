@@ -1,7 +1,7 @@
 import { bindActionCreators, createStore, Reducer } from 'redux'
 import { TODO_ADDED, TODO_MARKED_DONE, TODO_MARKED_UNDONE } from './action'
 import type { Todo } from './models/Todo'
-type State = {
+export type State = {
     todos: Todo[]
 
 

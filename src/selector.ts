@@ -1,6 +1,8 @@
-export const doneSelector = (s: any) => s.todos.filter((t: any) => t.done);
-export const todosSelector = (s: any) => s.todos.filter((t: any) => !t.done);
-export const donecountSelector = (s: any) => s.todos.filter((t: any) => t.done).length;
-export const undonecountSelector = (s: any) => s.todos.filter((t: any) => !t.done).length;
+import { State } from "./store"
+
+export const doneSelector = (s: State) => s.todos.filter((t) => t.done);
+export const todosSelector = (s: State) => s.todos.filter((t) => !t.done);
+export const donecountSelector = (s: State) => s.todos.filter((t) => t.done).length;
+export const undonecountSelector = (s: State) => s.todos.filter((t) => !t.done).length;
 
 
