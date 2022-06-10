@@ -1,26 +1,26 @@
-import { FC } from "react";
+import { FC, useCallback } from "react";
 import { Todo } from "./models/Todo"
 import cn from "classnames"
 import { RiDeleteBin6Fill } from 'react-icons/ri';
-import { TODO_ADDED, TODO_MARKED_DONE, TODO_MARKED_UNDONE, TODO_DELETE } from './action';
+import { TODO_ADDED, TODO_DELETE, TODO_STATUS_CHANGED } from './action';
 import { useDispatch, useSelector } from "react-redux";
 type TodoRowProps = {
     todo: Todo
 }
 const TodoRow: FC<TodoRowProps> = ({ todo }) => {
+    const { id, data, done } = todo
     const dispatch = useDispatch();
 
     const dispatcHandler = () => {
-        if (done) {
-            return dispatch(TODO_MARKED_UNDONE(id))
-        }
-        else {
-            return dispatch(TODO_MARKED_DONE(id))
-        }
+
+        return dispatch(TODO_STATUS_CHANGED(id, done))
+
+
+
     }
 
 
-    const { id, data, done } = todo
+
     return <div>
         <div className='flex items-center' >
             <input onClick={dispatcHandler} checked={done} type="checkbox" />

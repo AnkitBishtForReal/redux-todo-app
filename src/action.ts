@@ -1,10 +1,11 @@
 import { Todo } from "./models/Todo";
+let nextId = 0
 export const TODO_ADDED = (data: any) => {
 
     return {
         type: "todo added",
         payload: {
-            id: new Date().getTime().toString(),
+            id: ++nextId,
             data: data,
             done: false
         }
@@ -12,30 +13,21 @@ export const TODO_ADDED = (data: any) => {
 };
 
 
-export const TODO_MARKED_DONE = (id: any) => {
+export const TODO_STATUS_CHANGED = (id: any, done: boolean) => {
 
     return {
-        type: "todo marked done",
+        type: "todo status changed",
         payload: {
 
 
             id,
-            done: false
+            done: !done
+
         }
     };
 }
 
-export const TODO_MARKED_UNDONE = (id: any) => {
 
-    return {
-        type: "todo marked undone",
-        payload: {
-            id,
-            done: false
-
-        }
-    }
-}
 
 export const TODO_DELETE = (id: any) => {
 
