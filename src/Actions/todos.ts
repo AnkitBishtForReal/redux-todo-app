@@ -1,19 +1,19 @@
-import { Todo } from "./models/Todo";
+import { Todo } from "../models/Todo";
 let nextId = 0
-export const TODO_ADDED = (data: any) => {
+export const TODO_ADDED = (data: string) => {
 
     return {
         type: "todo added",
         payload: {
             id: ++nextId,
-            data: data,
+            data,
             done: false
         }
     }
 };
 
 
-export const TODO_STATUS_CHANGED = (id: any, done: boolean) => {
+export const TODO_STATUS_CHANGED = (id: number, done: boolean) => {
 
     return {
         type: "todo status changed",
@@ -29,10 +29,16 @@ export const TODO_STATUS_CHANGED = (id: any, done: boolean) => {
 
 
 
-export const TODO_DELETE = (id: any) => {
+export const TODO_DELETE = (id: number) => {
 
     return {
         type: "todo delete",
-        id
+        payload: {
+
+
+            id,
+
+
+        }
     }
 }

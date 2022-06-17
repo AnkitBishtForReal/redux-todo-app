@@ -2,34 +2,37 @@ import { FC, useCallback } from "react";
 import { Todo } from "./models/Todo"
 import cn from "classnames"
 import { RiDeleteBin6Fill } from 'react-icons/ri';
-import { TODO_ADDED, TODO_DELETE, TODO_STATUS_CHANGED } from './action';
-import { useDispatch, useSelector } from "react-redux";
+
+
 type TodoRowProps = {
-    todo: Todo
-}
-const TodoRow: FC<TodoRowProps> = ({ todo }) => {
+    todo: Todo;
+    onStatuschange: (id: number, done: boolean) => void;
+    onDelete: (id: number) => void;
+
+
+
+};
+const TodoRow: FC<TodoRowProps> = ({ todo, onStatuschange, onDelete }) => {
     const { id, data, done } = todo
-    const dispatch = useDispatch();
 
-    const dispatcHandler = () => {
+    const handleChange = useCallback(() => {
+        onStatuschange(id, done)
+    }, [id, done]);
 
-        return dispatch(TODO_STATUS_CHANGED(id, done))
-
-
-
-    }
-
+    const ondelete = useCallback(() => {
+        onDelete(id)
+    }, [id]);
 
 
     return <div>
         <div className='flex items-center' >
-            <input onClick={dispatcHandler} checked={done} type="checkbox" />
+            <input onClick={handleChange} checked={done} type="checkbox" />
             <div key={id}><span className={cn('mr-3 ml-3  dark:text-gray-200', { "line-through": done })}  >{data}</span></div>
 
             <div >
 
                 <div >
-                    <RiDeleteBin6Fill className='dark:bg-red-500' onClick={() => dispatch(TODO_DELETE(id))} />
+                    <RiDeleteBin6Fill className='dark:bg-red-500' onClick={ondelete} />
                 </div>
             </div>
 

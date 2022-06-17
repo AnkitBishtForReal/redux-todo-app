@@ -1,46 +1,27 @@
-import { bindActionCreators, createStore, Reducer } from 'redux'
+import { createStore, Reducer } from 'redux'
 
-import type { Todo } from './models/Todo'
+
+import { initialTodosState, todoReducer, TodoState } from './States/Todos';
+import { initialUsersState, UserReducer, UserState } from './States/Users';
 export type State = {
-    todos: { [id: number]: Todo }
+    todos: TodoState;
 
+    users: UserState
 
+};
+
+const initialState: State = {
+    todos: initialTodosState,
+    users: initialUsersState,
 }
-const initialState: State = { todos: {} }
-const reducer: Reducer<State> = (currentState: State = initialState, action) => {
-    console.log("sjnddk", currentState.todos)
+const reducer: Reducer<State> = (state: State = initialState, action) => {
 
-    switch (action.type) {
-        case "todo added": {
-            const { id, done } = action.payload
-            console.log("action payload", action.payload)
-            const newTodoArray = { ...currentState.todos, [id]: action.payload }
-            console.log("current state", currentState)
-            return { ...currentState, todos: newTodoArray }
-        }
-        case "todo status changed": {
-            console.log("marked as done")
-            const { id, done } = action.payload
-            console.log("done", done)
-            const newTodoArray = { ...currentState.todos, [id]: { ...currentState.todos[id], done } }
-
-            return { ...currentState, todos: newTodoArray }
-
-        }
-
-
-        default: {
-            return currentState;
-        }
-
-        case "todo delete": {
-            console.log("todo delete", action.id)
-            const newList = Object.keys(currentState.todos).map(id => currentState.todos[id as any]).filter((elem) => elem.id !== action.id)
-
-            return { ...currentState, todos: newList }
-        }
+    return {
+        todos: todoReducer(state.todos, action),
+        users: UserReducer(state.users, action),
     }
-
 }
-const store = createStore(reducer);
+const store = createStore(reducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__());
 export default store;
